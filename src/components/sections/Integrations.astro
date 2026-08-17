@@ -1,13 +1,43 @@
 ---
 import { integrations } from '../../data/integrations';
 import Section from '../ui/Section.astro';
+import {
+  siGithub, siFigma, siGoogledrive, siNotion, siZapier, siDropbox,
+} from 'simple-icons';
 
-const tones: Record<string, string> = {
-  primary: 'bg-primary-container text-primary-dark',
-  secondary: 'bg-secondary-container text-on-surface',
-  tertiary: 'bg-tertiary/15 text-tertiary',
-  error: 'bg-error/10 text-error',
+// Logos oficiales (simple-icons) — slugs disponibles
+const brandPaths: Record<string, { path: string }> = {
+  github: siGithub,
+  figma: siFigma,
+  googledrive: siGoogledrive,
+  notion: siNotion,
+  zapier: siZapier,
+  dropbox: siDropbox,
 };
+
+// Colores oficiales de marca (para el logo inline)
+const brandColors: Record<string, string> = {
+  github: '#181717',
+  figma: '#F24E1E',
+  googledrive: '#4285F4',
+  notion: '#000000',
+  zapier: '#FF4F00',
+  dropbox: '#0061FF',
+};
+
+// Logo de Slack (no disponible en simple-icons) — símbolo # de 4 píldoras
+const slackSvg =
+  '<rect x="3" y="3" width="7" height="4" rx="2" fill="#2EB67D"/>' +
+  '<rect x="14" y="3" width="7" height="4" rx="2" fill="#36C5F0"/>' +
+  '<rect x="3" y="17" width="7" height="4" rx="2" fill="#E01E5A"/>' +
+  '<rect x="14" y="17" width="7" height="4" rx="2" fill="#ECB22E"/>' +
+  '<rect x="3" y="7" width="4" height="7" rx="2" fill="#E01E5A"/>' +
+  '<rect x="7" y="14" width="4" height="7" rx="2" fill="#36C5F0"/>' +
+  '<rect x="13" y="3" width="4" height="7" rx="2" fill="#2EB67D"/>' +
+  '<rect x="13" y="14" width="4" height="7" rx="2" fill="#ECB22E"/>';
+
+// Logo de Teams (no disponible) — 2 personas en plato del color oficial
+const teamsBg = '#6264A7';
 ---
 
 <Section id="integraciones" ariaLabelledBy="integrations-title" class="!pt-0">
@@ -25,9 +55,27 @@ const tones: Record<string, string> = {
     {
       integrations.map((i, index) => (
         <li data-reveal style={`--reveal-delay:${index * 50}ms`}>
-          <div class="flex items-center gap-3 rounded-2xl bg-surface px-5 py-3.5 shadow-elev-1 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-elev-2">
-            <span class:list={['grid h-9 w-9 place-items-center rounded-lg font-body text-sm font-bold', tones[i.color]]}>
-              {i.slug}
+          <div
+            class="flex items-center gap-3 rounded-2xl bg-surface px-5 py-3.5 shadow-elev-1 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-elev-2"
+            title={`Integración con ${i.name}`}
+          >
+            <span class="grid h-9 w-9 place-items-center rounded-lg bg-surface-dim">
+              {i.slug === 'slack' ? (
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" set:html={slackSvg} />
+              ) : i.slug === 'teams' ? (
+                <span class="grid h-full w-full place-items-center rounded-lg" style={`background:${teamsBg}`}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
+                    <path d="M2.5 20c.8-3.2 3.4-5 6.5-5s5.7 1.8 6.5 5" />
+                    <path d="M15.5 8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                    <path d="M17.5 15.3c2 .5 3.6 2 4.2 4.7" />
+                  </svg>
+                </span>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" role="img" aria-label={`Logo de ${i.name}`} fill={brandColors[i.slug] ?? '#49454F'}>
+                  <path d={brandPaths[i.slug]?.path} />
+                </svg>
+              )}
             </span>
             <span class="text-sm font-medium text-on-surface">{i.name}</span>
           </div>

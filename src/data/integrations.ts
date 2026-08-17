@@ -2,16 +2,15 @@ export interface Integration {
   name: string;
   slug: string;
   color: 'primary' | 'secondary' | 'tertiary' | 'error';
-  font?: boolean;
 }
 
 export const integrations: Integration[] = [
-  { name: 'Slack', slug: 'S', color: 'secondary', font: true },
-  { name: 'GitHub', slug: 'GH', color: 'primary', font: true },
-  { name: 'Figma', slug: 'F', color: 'error', font: true },
-  { name: 'Google Drive', slug: 'G', color: 'tertiary', font: true },
-  { name: 'Notion', slug: 'N', color: 'secondary', font: true },
-  { name: 'Teams', slug: 'T', color: 'primary', font: true },
-  { name: 'Zapier', slug: 'Z', color: 'tertiary', font: true },
-  { name: 'Dropbox', slug: 'D', color: 'primary', font: true },
+  { name: 'Slack', slug: 'slack', color: 'secondary' },
+  { name: 'GitHub', slug: 'github', color: 'primary' },
+  { name: 'Figma', slug: 'figma', color: 'error' },
+  { name: 'Google Drive', slug: 'googledrive', color: 'tertiary' },
+  { name: 'Notion', slug: 'notion', color: 'secondary' },
+  { name: 'Teams', slug: 'teams', color: 'primary' },
+  { name: 'Zapier', slug: 'zapier', color: 'tertiary' },
+  { name: 'Dropbox', slug: 'dropbox', color: 'primary' },
 ];
