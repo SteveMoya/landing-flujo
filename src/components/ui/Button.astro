@@ -1,0 +1,62 @@
+---
+export type ButtonVariant = 'filled' | 'tonal' | 'outlined' | 'text';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  variant = 'filled',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+  target,
+  rel,
+  class: className,
+} = Astro.props;
+
+const base =
+  'relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-body text-sm font-medium tracking-wide transition-all duration-200 ease-out focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-40 active:scale-[0.98]';
+
+const variants: Record<ButtonVariant, string> = {
+  filled: 'bg-primary text-on-primary shadow-elev-1 hover:bg-primary-dark hover:shadow-elev-2',
+  tonal: 'bg-primary-container text-primary-dark hover:brightness-95',
+  outlined: 'border-2 border-primary text-primary hover:bg-primary-container/50',
+  text: 'text-primary hover:bg-primary-container/60',
+};
+
+const sizes: Record<ButtonSize, string> = {
+  sm: 'px-4 py-2 text-xs',
+  md: 'px-6 py-3',
+  lg: 'px-8 py-3.5 text-base',
+};
+
+const classes = [base, variants[variant], sizes[size], className].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a href={href} class={classes} aria-label={ariaLabel} aria-disabled={disabled || undefined} target={target} rel={rel}>
+      <span class="relative z-10 inline-flex items-center gap-2">
+        <slot />
+      </span>
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel} disabled={disabled}>
+      <span class="relative z-10 inline-flex items-center gap-2">
+        <slot />
+      </span>
+    </button>
+  )
+}

@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string;
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  withIcon?: boolean;
+}
+
+const { color = 'primary', class: className } = Astro.props;
+
+const colors = {
+  primary: 'bg-primary-container text-primary-dark',
+  secondary: 'bg-secondary-container text-on-surface',
+  tertiary: 'bg-tertiary/15 text-tertiary',
+  error: 'bg-error/10 text-error',
+} as const;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center gap-1 rounded-full px-3 py-1 font-body text-[11px] font-medium uppercase tracking-wide',
+    colors[color],
+    className,
+  ]}
+>
+  <slot />
+</span>

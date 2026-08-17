@@ -1,0 +1,45 @@
+---
+import { features } from '../../data/features';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Chip from '../ui/Chip.astro';
+import Icon from '../ui/Icon.astro';
+
+const tones: Record<string, string> = {
+  primary: 'bg-primary-container text-primary-dark',
+  secondary: 'bg-secondary-container text-on-surface',
+  tertiary: 'bg-tertiary/15 text-tertiary',
+  error: 'bg-error/10 text-error',
+};
+---
+
+<Section id="funciones" ariaLabelledBy="features-title">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 text-sm font-medium uppercase tracking-wide text-primary">Funciones</p>
+    <h2 id="features-title" class="font-body text-4xl font-bold tracking-tight text-on-surface sm:text-5xl">
+      Todo lo que necesitas, <span class="text-primary">nada que sobre</span>
+    </h2>
+    <p class="mt-4 text-lg text-on-surface-variant">
+      Cada función resuelve un problema real. Sin modo "power user" que nadie usa.
+    </p>
+  </div>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      features.map((f, index) => (
+        <li data-reveal style={`--reveal-delay:${(index % 3) * 80}ms`}>
+          <Card class="group h-full">
+            <div class="flex items-start justify-between">
+              <span class:list={['grid h-12 w-12 place-items-center rounded-2xl transition-transform duration-300 group-hover:scale-110', tones[f.color]]}>
+                <Icon name={f.icon} size={22} />
+              </span>
+              {f.tag && <Chip color="primary" withIcon>{f.tag}</Chip>}
+            </div>
+            <h3 class="mt-5 text-lg font-semibold tracking-tight text-on-surface">{f.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">{f.description}</p>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+  elevation?: 1 | 2 | 3;
+  padded?: boolean;
+  as?: 'article' | 'div' | 'li';
+}
+
+const { elevation = 1, padded = true, as: Tag = 'div', class: className }: Props = Astro.props;
+
+const elevations = { 1: 'elev-1', 2: 'elev-2', 3: 'elev-3' } as const;
+---
+
+<Tag
+  class:list={[
+    'surface transition-all duration-300',
+    elevations[elevation],
+    padded && 'p-6',
+    'hover:elev-2',
+    className,
+  ]}
+>
+  <slot />
+</Tag>

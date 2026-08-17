@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="404 — esta tarea no existe." noindex>
+  <section class="flex min-h-[80svh] flex-col items-center justify-center px-6 text-center">
+    <p class="text-sm font-medium uppercase tracking-wide text-primary">Error 404</p>
+    <h1 class="mt-4 font-body text-7xl font-bold tracking-tight text-on-surface md:text-8xl">
+      Esta tarea <span class="text-primary">no existe</span>
+    </h1>
+    <p class="mt-6 max-w-md text-on-surface-variant">
+      La moviste o la completaste y se fue del tablero. Vuelve a tu flujo.
+    </p>
+    <Button href="/" class="mt-8">
+      Volver al tablero
+    </Button>
+  </section>
+</BaseLayout>

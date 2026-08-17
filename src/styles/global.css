@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+
+/* ============================================================
+   FLUJO DESIGN SYSTEM — Tokens
+   Material Design: superficies, elevación en capas, densidad.
+   ============================================================ */
+@theme {
+  /* Tipografía */
+  --font-body: "Roboto", ui-sans-serif, system-ui, sans-serif;
+
+  /* Material 3 */
+  --color-surface: #ffffff;
+  --color-surface-dim: #f6f7fb;
+  --color-primary: #1a73e8; /* Google Blue */
+  --color-primary-dark: #1557b0;
+  --color-primary-container: #d8e6ff;
+  --color-on-primary: #ffffff;
+  --color-secondary: #006a6a; /* teal profundo */
+  --color-secondary-container: #6ff6f4;
+  --color-tertiary: #6750a4; /* violeta M3 */
+  --color-error: #b3261e;
+  --color-on-surface: #1f1f1f;
+  --color-on-surface-variant: #49454f;
+
+  /* Elevación Material (capas) */
+  --shadow-elev-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+  --shadow-elev-2: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+  --shadow-elev-3: 0 1px 3px rgb(0 0 0 / 0.3), 0 4px 8px 3px rgb(0 0 0 / 0.15);
+  --shadow-elev-4: 0 2px 3px rgb(0 0 0 / 0.3), 0 6px 10px 4px rgb(0 0 0 / 0.15);
+  --shadow-elev-5: 0 4px 4px rgb(0 0 0 / 0.3), 0 8px 12px 6px rgb(0 0 0 / 0.15);
+
+  --radius-m3: 1rem; /* 16px */
+  --radius-m3-sm: 0.75rem; /* 12px */
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-dim font-body text-on-surface antialiased;
+  }
+
+  ::selection {
+    background: var(--color-primary-container);
+    color: var(--color-primary-dark);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ============================================================
+   Utilidades de marca
+   ============================================================ */
+@layer components {
+  .container-flujo {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  /* Superficie Material con elevación */
+  .surface {
+    background: var(--color-surface);
+    border-radius: var(--radius-m3);
+  }
+
+  .elev-1 {
+    box-shadow: var(--shadow-elev-1);
+  }
+
+  .elev-2 {
+    box-shadow: var(--shadow-elev-2);
+  }
+
+  .elev-3 {
+    box-shadow: var(--shadow-elev-3);
+  }
+}
+
+/* Header: app bar transparente + scrolled (fuera de @layer) */
+[data-header] {
+  background: transparent;
+}
+
+[data-header].is-scrolled {
+  background: rgb(255 255 255 / 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-elev-1);
+}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

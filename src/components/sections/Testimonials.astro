@@ -1,0 +1,40 @@
+---
+import { testimonials } from '../../data/testimonials';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Avatar from '../ui/Avatar.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section id="opiniones" ariaLabelledBy="testimonials-title">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 text-sm font-medium uppercase tracking-wide text-primary">Opiniones</p>
+    <h2 id="testimonials-title" class="font-body text-4xl font-bold tracking-tight text-on-surface sm:text-5xl">
+      Equipos que ya <span class="text-primary">fluyen</span>
+    </h2>
+  </div>
+
+  <ul class="grid gap-6 md:grid-cols-3">
+    {
+      testimonials.map((t, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`}>
+          <Card class="flex h-full flex-col">
+            <div class="flex gap-0.5 text-tertiary" role="img" aria-label="Valoración: 5 de 5">
+              {Array.from({ length: 5 }).map(() => <Icon name="star" size={16} />)}
+            </div>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-on-surface">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t border-on-surface/10 pt-4">
+              <Avatar initials={t.initials} color={index === 1 ? 'tertiary' : index === 2 ? 'error' : 'primary'} size="sm" />
+              <div>
+                <p class="text-sm font-semibold text-on-surface">{t.name}</p>
+                <p class="text-xs text-on-surface-variant">{t.role}</p>
+              </div>
+            </figcaption>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

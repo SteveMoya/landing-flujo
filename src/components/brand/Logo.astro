@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Flujo — inicio"
+  class:list={['group inline-flex items-center gap-2.5', className]}
+>
+  <span
+    class="grid h-10 w-10 place-items-center rounded-xl bg-primary text-on-primary shadow-elev-2 transition-transform duration-200 group-hover:scale-105 group-hover:-rotate-3"
+    aria-hidden="true"
+  >
+    <!-- Logotipo: doble flecha de flujo -->
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" />
+    </svg>
+  </span>
+  <span class="font-body text-2xl font-medium tracking-tight text-on-surface transition-opacity duration-200 group-hover:opacity-80">
+    flujo
+  </span>
+</a>

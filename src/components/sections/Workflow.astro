@@ -1,0 +1,49 @@
+---
+import { workflow } from '../../data/workflow';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+
+const iconColors: Record<string, string> = {
+  grid: 'bg-primary-container text-primary-dark',
+  sparkles: 'bg-tertiary/15 text-tertiary',
+  plug: 'bg-secondary-container text-on-surface',
+  chart: 'bg-primary-container text-primary-dark',
+};
+---
+
+<Section id="como" ariaLabelledBy="workflow-title" class="!pt-0">
+  <div class="mx-auto mb-14 max-w-2xl text-center">
+    <p class="mb-3 text-sm font-medium uppercase tracking-wide text-primary">Cómo fluye</p>
+    <h2 id="workflow-title" class="font-body text-4xl font-bold tracking-tight text-on-surface sm:text-5xl">
+      De la idea al resultado <span class="text-primary">sin fricción</span>
+    </h2>
+  </div>
+
+  <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    {
+      workflow.map((step, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`} class="relative">
+          <Card class="h-full text-center">
+            <span class:list={['mx-auto grid h-14 w-14 place-items-center rounded-full', iconColors[step.icon]]}>
+              <Icon name={step.icon} size={24} />
+            </span>
+            <p class="mt-4 font-body text-xs font-medium uppercase tracking-widest text-on-surface-variant">
+              Paso {step.num}
+            </p>
+            <h3 class="mt-2 text-lg font-semibold tracking-tight text-on-surface">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">{step.description}</p>
+          </Card>
+          {index < workflow.length - 1 && (
+            <span
+              aria-hidden="true"
+              class="absolute -right-5 top-1/2 z-10 hidden -translate-y-1/2 text-primary lg:block"
+            >
+              <Icon name="arrow-right" size={22} />
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</Section>

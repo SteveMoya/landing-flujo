@@ -1,0 +1,29 @@
+---
+interface Props {
+  initials: string;
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { initials, color = 'primary', size = 'md', class: className } = Astro.props;
+
+const colors = {
+  primary: 'bg-primary text-on-primary',
+  secondary: 'bg-secondary text-on-primary',
+  tertiary: 'bg-tertiary text-on-primary',
+  error: 'bg-error text-on-primary',
+} as const;
+
+const sizes = {
+  sm: 'h-9 w-9 text-sm',
+  md: 'h-12 w-12 text-base',
+} as const;
+---
+
+<span
+  class:list={['inline-grid shrink-0 place-items-center rounded-full font-body font-medium', colors[color], sizes[size], className]}
+  aria-hidden="true"
+>
+  {initials}
+</span>

@@ -1,0 +1,58 @@
+---
+import { site } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+---
+
+<div
+  data-menu
+  id="mobile-menu"
+  class="fixed inset-0 z-40 hidden lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+>
+  <div class="absolute inset-0 bg-surface-dim/95 backdrop-blur-xl"></div>
+
+  <nav class="container-flujo relative flex h-full flex-col justify-center gap-1" aria-label="Menú móvil">
+    {
+      site.nav.map((item) => (
+        <a
+          href={item.href}
+          class="rounded-xl px-3 py-3 font-body text-3xl font-medium tracking-tight text-on-surface transition-colors hover:bg-primary-container hover:text-primary-dark"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a
+      href="#cta"
+      class="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-4 font-body text-sm font-medium text-on-primary shadow-elev-2"
+    >
+      Probar gratis
+    </a>
+    <div class="mt-10 flex gap-3">
+      {
+        site.socials.map((s) => (
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.name}
+            class="grid h-11 w-11 place-items-center rounded-full bg-surface text-on-surface-variant shadow-elev-1 transition-transform duration-200 hover:-translate-y-0.5 hover:text-primary"
+          >
+            <Icon name={s.icon} size={18} />
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <button
+    data-menu-close
+    type="button"
+    class="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-surface text-on-surface shadow-elev-1"
+    aria-label="Cerrar menú"
+  >
+    <Icon name="close" size={22} />
+  </button>
+</div>
