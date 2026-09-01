@@ -1,0 +1,54 @@
+---
+import { successStory } from '../../data/success';
+import Section from '../ui/Section.astro';
+import Chip from '../ui/Chip.astro';
+---
+
+<Section id="caso-exito" ariaLabelledBy="success-title">
+  <div class="grid items-center gap-12 lg:grid-cols-2">
+    <!-- Imagen del equipo con elevación Material (16px, sombra doble) -->
+    <div data-reveal>
+      <div class="relative overflow-hidden rounded-2xl shadow-elev-3 ring-1 ring-on-surface/5">
+        <img
+          src={successStory.image.src}
+          alt={successStory.image.alt}
+          class="aspect-[4/3] w-full object-cover"
+          loading="lazy"
+          decoding="async"
+          width="1280"
+          height="960"
+        />
+        <!-- chip solapado tipo FAB Material -->
+        <div class="absolute left-4 top-4 rounded-full bg-surface px-4 py-2 text-xs font-medium text-on-surface shadow-elev-2">
+          🏗️ Proyecto: Remodelación Estadio
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div data-reveal style="--reveal-delay:120ms">
+      <Chip class="mb-6" color="tertiary">{successStory.eyebrow}</Chip>
+      <h2 id="success-title" class="font-body text-4xl font-bold tracking-tight text-on-surface sm:text-5xl">
+        {successStory.title} <span class="text-primary">{successStory.accent}</span>
+      </h2>
+      <p class="mt-3 text-lg font-medium text-primary-dark">{successStory.client} · {successStory.industry}</p>
+      <p class="mt-4 leading-relaxed text-on-surface-variant">{successStory.challenge}</p>
+
+      <figure class="mt-6 border-l-4 border-primary bg-primary-container/50 p-5">
+        <blockquote class="text-lg font-medium leading-relaxed text-on-surface">“{successStory.quote}”</blockquote>
+        <figcaption class="mt-3 text-sm text-on-surface-variant">
+          <span class="font-semibold text-on-surface">{successStory.author}</span> · {successStory.authorRole}
+        </figcaption>
+      </figure>
+
+      <dl class="mt-8 grid grid-cols-3 gap-4">
+        {successStory.metrics.map((m) => (
+          <div>
+            <dd class="font-body text-2xl font-bold tracking-tight text-primary sm:text-3xl">{m.value}</dd>
+            <dt class="mt-1 text-xs leading-snug text-on-surface-variant">{m.label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</Section>
