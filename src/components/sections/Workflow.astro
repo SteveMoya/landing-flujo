@@ -20,6 +20,31 @@ const iconColors: Record<string, string> = {
     </h2>
   </div>
 
+  <!-- Vídeo de equipo de fondo (Pixabay) en superficie Material -->
+  <div class="relative mb-14 overflow-hidden rounded-3xl shadow-elev-3 ring-1 ring-on-surface/5">
+    <video
+      class="absolute inset-0 h-full w-full object-cover"
+      src="/bg-team.mp4"
+      poster="/workflow-office.jpg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    ></video>
+    <!-- velo Material para legibilidad + hoja de superficie -->
+    <div class="absolute inset-0 bg-gradient-to-br from-on-surface/55 via-on-surface/15 to-transparent" aria-hidden="true"></div>
+    <div class="relative px-6 py-14 text-center sm:py-20">
+      <span class="inline-block rounded-full bg-surface px-4 py-1.5 text-xs font-medium text-on-surface shadow-elev-1">
+        🎥 Flujo en acción
+      </span>
+      <h3 class="mt-4 font-body text-2xl font-bold tracking-tight text-white sm:text-3xl">
+        Equipos que fluyen, <span class="text-white/90">juntos</span>
+      </h3>
+    </div>
+  </div>
+
   <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
     {
       workflow.map((step, index) => (

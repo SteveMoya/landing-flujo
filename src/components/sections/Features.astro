@@ -24,6 +24,23 @@ const tones: Record<string, string> = {
     </p>
   </div>
 
+  <!-- Foto real del equipo (Pixabay) con elevación Material: rounded-2xl + sombra doble -->
+  <div data-reveal class="relative mb-14 overflow-hidden rounded-2xl shadow-elev-3 ring-1 ring-on-surface/5">
+    <img
+      src="/workflow-office.jpg"
+      alt="Equipo colaborando en un espacio de trabajo luminoso y ordenado"
+      class="aspect-[21/9] w-full object-cover"
+      loading="lazy"
+      decoding="async"
+      width="1280"
+      height="549"
+    />
+    <!-- chip superpuesto tipo FAB Material -->
+    <div class="absolute bottom-4 left-4 rounded-full bg-surface px-4 py-2 text-xs font-medium text-on-surface shadow-elev-2">
+      🧑‍💻 Colaboración sin fricción
+    </div>
+  </div>
+
   <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {
       features.map((f, index) => (
