@@ -16,7 +16,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",
     "@fontsource/roboto": "^5.3.0",
-    "astro": "~7.3.8",
+    "astro": "^7.4.13",
     "simple-icons": "^16.38.1"
   },
   "devDependencies": {
